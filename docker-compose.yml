@@ -1,0 +1,13 @@
+services:
+  db:
+    image: postgres:latest # Используем последнюю версию PostgreSQL.
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER} # Имя пользователя БД.
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD} # Пароль пользователя БД.
+      POSTGRES_DB: ${POSTGRES_DB} # Название базы данных.
+
+  bot:
+    build: .
+    depends_on:
+      - db # Зависимость от сервиса БД при запуске бота.
+    env_file: .env
